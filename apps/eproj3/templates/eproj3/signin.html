@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register/Log In - E-Project 3</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"
+		  href="{% static 'eproj3/css/styles.css' %}"
+		  media="screen"
+		  title="no title"
+		  charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div class="nav_top">  <!-- TODO: update or delete -->
+			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		</div>
+		<div class="signin_forms">
+			<h3>Register</h3>
+			<p>Sign up today! It's free!</p>
+			{% if messages %}
+				<ul>
+					{% for msg in messages %}
+						{% if msg.tags == "reg error" %}
+							<li>{{ msg }}</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endif %}
+			<form action="{% url 'eproj3_register' %}" method="POST">
+				{% csrf_token %}
+				<div class="form_labels">
+					<label for="reg_name">Name</label>
+					<label for="reg_username">Username</label>
+					<label for="reg_password">Password</label>
+					<label for="reg_password_confirm">Confirm password</label>
+				</div>
+				<div class="form_inputs">
+					<input type="text" name="reg_name">
+					<input type="text" name="reg_username">
+					<input type="password" name="reg_password">
+					<input type="password" name="reg_password_confirm">
+					<input type="submit" value="Register">
+				</div>
+			</form>
+		</div>
+		<div class="signin_forms">
+			<h3>Log in</h3>
+			<p>Already registered? Log in here!</p>
+			{% if messages %}
+				<ul>
+					{% for msg in messages %}
+						{% if msg.tags == "log error" %}
+							<li>{{ msg }}</li>
+						{% elif msg.tags == "log success" %}
+							<p class="success">{{ msg }}</p>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endif %}
+			<form action="{% url 'eproj3_login' %}" method="POST">
+				{% csrf_token %}
+				<div class="form_labels">
+					<label for="log_username">Username</label>
+					<label for="log_password">Password</label>
+				</div>
+				<div class="form_inputs">
+					<input type="text" name="log_username">
+					<input type="password" name="log_password">
+					<input type="submit" value="Log in">
+				</div>
+			</form>
+		</div>
+		<div class="nav_bottom">  <!-- TODO: update or delete -->
+			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		</div>
+		<div class="footer">
+			<img src="{% static 'eproj3/img/coding_dojo.png' %}">
+		</div>
+	</div>
+</body>
+</html>

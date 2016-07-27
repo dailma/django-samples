@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Project 3</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"
+		  href="{% static 'eproj3/css/styles.css' %}"
+		  media="screen"
+		  title="no title"
+		  charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div class="nav_top">  <!-- TODO: update or delete -->
+			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		</div>
+		<h3>Index</h3>
+		<table>
+			<tr>
+				<th>Heading 1</th>
+				<th>Heading 2</th>
+				<th>Heading 3</th>
+				<th>Heading 4</th>
+			</tr>
+			{% if items %}  <!-- TODO: update to match context -->
+				{% for item in items %}
+					<tr>
+						<td>{{ item }}</td>
+						<td>{{ item }}</td>
+						<td>{{ item }}</td>
+						<td>{{ item }}</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</table>
+		<div class="nav_bottom">  <!-- TODO: update or delete -->
+			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		</div>
+		<div class="footer">
+			<img src="{% static 'eproj3/img/coding_dojo.png' %}">
+		</div>
+	</div>
+</body>
+</html>
