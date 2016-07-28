@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Item - My Wish List</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"
+		  href="{% static 'eproj3/css/styles.css' %}"
+		  media="screen"
+		  title="no title"
+		  charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div class="nav_top">
+			<a href="{% url 'eproj3_index' %}">Home</a>
+			<a href="{% url 'eproj3_logout' %}">Log out</a>
+		</div>
+		<h3>Create a wish list item</h3>
+		{% if products %}
+			<ul>
+				{% for msg in messages %}
+					{% if msg.tags == "item error" %}
+						<li>{{ msg }}</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<form action="{% url 'eproj3_createitem' %}" method="POST">
+			{% csrf_token %}
+			<label>Item/Product
+				<input type="text" name="inp_product">
+			</label>
+			<input type="submit" value="Add">
+		</form>
+		<div class="footer">
+			<img src="{% static 'eproj3/img/coding_dojo.png' %}">
+		</div>
+	</div>
+</body>
+</html>

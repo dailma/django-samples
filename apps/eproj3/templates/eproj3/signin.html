@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register/Log In - E-Project 3</title>
+    <title>Register/Log In - My Wish List</title>
 	{% load staticfiles %}
 	<link rel="stylesheet"
 		  href="{% static 'eproj3/css/styles.css' %}"
@@ -12,9 +12,6 @@
 </head>
 <body>
 	<div class="container">
-		<div class="nav_top">  <!-- TODO: update or delete -->
-			<a href="{% url 'eproj3_index' %}">Placeholder</a>
-		</div>
 		<div class="signin_forms">
 			<h3>Register</h3>
 			<p>Sign up today! It's free!</p>
@@ -32,17 +29,20 @@
 				<div class="form_labels">
 					<label for="reg_name">Name</label>
 					<label for="reg_username">Username</label>
-					<label for="reg_password">Password</label>
+					<label for="reg_password">Password*</label>
 					<label for="reg_password_confirm">Confirm password</label>
+					<label for="reg_date_hired">Date hired</label>
 				</div>
 				<div class="form_inputs">
 					<input type="text" name="reg_name">
 					<input type="text" name="reg_username">
 					<input type="password" name="reg_password">
 					<input type="password" name="reg_password_confirm">
+					<input type="text" name="reg_date_hired">
 					<input type="submit" value="Register">
 				</div>
 			</form>
+			<p>*Password must be at least 8 characters</p>
 		</div>
 		<div class="signin_forms">
 			<h3>Log in</h3>
@@ -70,9 +70,6 @@
 					<input type="submit" value="Log in">
 				</div>
 			</form>
-		</div>
-		<div class="nav_bottom">  <!-- TODO: update or delete -->
-			<a href="{% url 'eproj3_index' %}">Placeholder</a>
 		</div>
 		<div class="footer">
 			<img src="{% static 'eproj3/img/coding_dojo.png' %}">

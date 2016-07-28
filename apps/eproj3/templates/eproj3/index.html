@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>E-Project 3</title>
+    <title>My Wish List</title>
 	{% load staticfiles %}
 	<link rel="stylesheet"
 		  href="{% static 'eproj3/css/styles.css' %}"
@@ -12,30 +12,62 @@
 </head>
 <body>
 	<div class="container">
-		<div class="nav_top">  <!-- TODO: update or delete -->
-			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		<div class="nav_top">
+			<a href="{% url 'eproj3_logout' %}">Log out</a>
 		</div>
-		<h3>Index</h3>
+		<h3>Hello, {{ request.session.name }}</h3>
+		<h4>Your wish list</h4>
 		<table>
 			<tr>
-				<th>Heading 1</th>
-				<th>Heading 2</th>
-				<th>Heading 3</th>
-				<th>Heading 4</th>
+				<th>Item</th>
+				<th>Added by</th>
+				<th>Date added</th>
+				<th>Action</th>
 			</tr>
-			{% if items %}  <!-- TODO: update to match context -->
-				{% for item in items %}
-					<tr>
-						<td>{{ item }}</td>
-						<td>{{ item }}</td>
-						<td>{{ item }}</td>
-						<td>{{ item }}</td>
-					</tr>
+			{% if products %}
+				{% for product in products %}
+					{% if product.creator.id == request.session.user_id %}
+						<tr>
+							<td>
+								<a href="{% url 'eproj3_showitem' product.id %}">{{ product.product }}</a>
+							</td>
+							<td>{{ product.creator.name }}</td>
+							<td>{{ product.created_at }}</td>
+							{% if product.creator.id == request.session.user_id %}
+								<td><a href="{% url 'eproj3_destroyitem' product.id %}">Delete</a></td>
+							{% else %}
+								<td><a href="{% url 'eproj3_unlinkitem' product.id %}">Remove from my wish list</a></td>
+							{% endif %}
+						</tr>
+					{% endif %}
 				{% endfor %}
 			{% endif %}
 		</table>
-		<div class="nav_bottom">  <!-- TODO: update or delete -->
-			<a href="{% url 'eproj3_index' %}">Placeholder</a>
+		<h4>Other users' wish lists</h4>
+		<table>
+			<tr>
+				<th>Item</th>
+				<th>Added by</th>
+				<th>Date added</th>
+				<th>Action</th>
+			</tr>
+			{% if products %}
+				{% for product in products %}
+					{% if product.creator.id != request.session.user_id %}
+						<tr>
+							<td>
+								<a href="{% url 'eproj3_showitem' product.id %}">{{ product.product }}</a>
+							</td>
+							<td>{{ product.creator.name }}</td>
+							<td>{{ product.created_at }}</td>
+							<td><a href="{% url 'eproj3_linkitem' product.id %}">Add to my wish list</a></td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</table>
+		<div class="nav_bottom">
+			<a href="{% url 'eproj3_additem' %}">Add item</a>
 		</div>
 		<div class="footer">
 			<img src="{% static 'eproj3/img/coding_dojo.png' %}">
